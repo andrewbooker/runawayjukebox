@@ -9,7 +9,18 @@
                 margin: 40px;
             }
             img {
-                border-radius: 8px;
+                border-radius: 3%;
+            }
+            .date-row {
+                display: flex;
+            }
+            .gig-date {
+               margin-right: 20px;
+               font-weight: bold;
+               color: rgba(255,255,255,0.6);
+               width: 100px;
+            }
+            .gig-location {
             }
         </style>
     </head>
@@ -19,7 +30,7 @@
         </div>
         <div>
             <h2>Live dates</h2>
-            <div id="dates"></div>
+            <div class="dates" id="dates"></div>
         </div>
     </body>
     <script>
@@ -36,18 +47,28 @@
 
         const img_size = { width: "400", height: "260" };
         const main_image = document.getElementById("main-image");
-        const ratio = 1.0 * window.innerWidth / screen.width;
+        const ratio = 0.9 * window.innerWidth / screen.width;
         main_image.setAttribute("width", img_size.width * ratio);
         main_image.setAttribute("height", img_size.height * ratio);
 
         const options = { year: "numeric", month: "short", day: "2-digit" };
         const dates = document.getElementById("dates");
         gigs.forEach(g => {
-            const loc = g[0];
-            const d = new Date(g[1]);
+            const loc = document.createTextNode(g[0]);
+            const d = document.createTextNode(new Date(g[1]).toLocaleDateString("en-GB", options));
 
             gig = document.createElement("div");
-            gig.appendChild(document.createTextNode(d.toLocaleDateString("en-GB", options) + " " + loc));
+            gig.className = "date-row";
+
+            const left = document.createElement("div");
+            const right = document.createElement("div");
+            left.className = "gig-date";
+            right.className = "gig-location";
+            left.appendChild(d);
+            right.appendChild(loc);
+
+            gig.appendChild(left);
+            gig.appendChild(right);
             dates.appendChild(gig);
         });
     </script>
