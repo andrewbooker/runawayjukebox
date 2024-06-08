@@ -1,0 +1,43 @@
+<http>
+    <head>
+        <title>Runaway Jukebox</title>
+        <style>
+            body {
+                background-color: black;
+                color: white;
+                font-family: Arial;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <img src="rj_landscape.png" width="400" height="260" />
+        </div>
+        <div>
+            <h2>Live dates</h2>
+            <div id="dates"></div>
+        </div>
+    </body>
+    <script>
+        const gigs = [
+            ["Half Moon, Bishops Stortford", "2024-06-21"],
+            ["Duke Of Wellington, Epping", "2024-06-22"],
+            ["Coach & Horses, Leyton", "2024-08-30"],
+            ["Highams Park, TBC", "2024-09-08"],
+            ["Bar Love, Portobello Road, London", "2024-09-12"],
+            ["Berkhamsted Beer Festival", "2024-09-14"],
+            ["Bar Love, Portobello Road, London", "2024-10-10"],
+            ["Bar Love, Portobello Road, London", "2024-11-14"]
+        ];
+        
+        const dates = document.getElementById("dates");
+        gigs.forEach(g => {
+            const loc = g[0];
+            const d = g[1];
+            
+            gig = document.createElement("div");
+            gig.appendChild(document.createTextNode(d + " " + loc));
+            dates.appendChild(gig);
+        });
+    </script>
+</http>
