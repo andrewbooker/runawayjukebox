@@ -6,6 +6,10 @@
                 background-color: black;
                 color: white;
                 font-family: Arial;
+                margin: 40px;
+            }
+            img {
+                border-radius: 8px;
             }
         </style>
     </head>
@@ -29,14 +33,15 @@
             ["Bar Love, Portobello Road, London", "2024-10-10"],
             ["Bar Love, Portobello Road, London", "2024-11-14"]
         ];
-        
+
+        const options = { year: "numeric", month: "short", day: "2-digit" };
         const dates = document.getElementById("dates");
         gigs.forEach(g => {
             const loc = g[0];
-            const d = g[1];
-            
+            const d = new Date(g[1]);
+
             gig = document.createElement("div");
-            gig.appendChild(document.createTextNode(d + " " + loc));
+            gig.appendChild(document.createTextNode(d.toLocaleDateString("en-GB", options) + " " + loc));
             dates.appendChild(gig);
         });
     </script>
