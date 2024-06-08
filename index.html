@@ -7,18 +7,24 @@
                 color: white;
                 font-family: Arial;
                 margin: 40px;
+                position: relative;
+                text-align: center;
             }
             img {
-                border-radius: 3%;
+                border-radius: 4%;
+            }
+            #dates {
+                display: flex;
+                flex-direction: column;
             }
             .date-row {
                 display: flex;
+                justify-content: center;
             }
             .gig-date {
                margin-right: 20px;
                font-weight: bold;
                color: rgba(255,255,255,0.6);
-               width: 100px;
             }
             .gig-location {
             }
@@ -29,7 +35,7 @@
             <img id="main-image" src="rj_landscape.png" />
         </div>
         <div>
-            <h2>Live dates</h2>
+            <h2 id="dates-heading">Live dates</h2>
             <div class="dates" id="dates"></div>
         </div>
     </body>
@@ -42,7 +48,9 @@
             ["Bar Love, Portobello Road, London", "2024-09-12"],
             ["Berkhamsted Beer Festival", "2024-09-14"],
             ["Bar Love, Portobello Road, London", "2024-10-10"],
-            ["Bar Love, Portobello Road, London", "2024-11-14"]
+            ["Bar Love, Portobello Road, London", "2024-11-14"],
+            ["Hemnall Social Club, Epping", "2024-12-06"],
+            ["South Mill Arts Centre, Bishops Stortford", "2025-01-09"]
         ];
 
         const img_size = { width: "400", height: "260" };
@@ -50,6 +58,8 @@
         const ratio = 0.9 * window.innerWidth / screen.width;
         main_image.setAttribute("width", img_size.width * ratio);
         main_image.setAttribute("height", img_size.height * ratio);
+        document.getElementById("dates-heading").setAttribute("style", "font-size: " + (200 * ratio) + "%");
+        const f = 100 * ratio;
 
         const options = { year: "numeric", month: "short", day: "2-digit" };
         const dates = document.getElementById("dates");
@@ -66,6 +76,7 @@
             right.className = "gig-location";
             left.appendChild(d);
             right.appendChild(loc);
+            gig.setAttribute("style", "font-size: " + f + "%");
 
             gig.appendChild(left);
             gig.appendChild(right);
