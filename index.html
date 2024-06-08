@@ -15,7 +15,7 @@
     </head>
     <body>
         <div>
-            <img src="rj_landscape.png" width="400" height="260" />
+            <img id="main-image" src="rj_landscape.png" />
         </div>
         <div>
             <h2>Live dates</h2>
@@ -33,6 +33,12 @@
             ["Bar Love, Portobello Road, London", "2024-10-10"],
             ["Bar Love, Portobello Road, London", "2024-11-14"]
         ];
+
+        const img_size = { width: "400", height: "260" };
+        const main_image = document.getElementById("main-image");
+        const ratio = 1.0 * window.innerWidth / screen.width;
+        main_image.setAttribute("width", img_size.width * ratio);
+        main_image.setAttribute("height", img_size.height * ratio);
 
         const options = { year: "numeric", month: "short", day: "2-digit" };
         const dates = document.getElementById("dates");
