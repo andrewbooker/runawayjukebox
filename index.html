@@ -65,7 +65,7 @@
 
         const img_size = { width: "400", height: "260" };
         const main_image = document.getElementById("main-image");
-        const ratio = 0.9 * window.innerWidth / screen.width;
+        const ratio = window.devicePixelRatio == 1.0 ? 1.0 : 0.9 * window.innerWidth / screen.width;
         main_image.setAttribute("width", img_size.width * ratio);
         main_image.setAttribute("height", img_size.height * ratio);
         document.getElementById("dates-heading").setAttribute("style", "font-size: " + (200 * ratio) + "%");
