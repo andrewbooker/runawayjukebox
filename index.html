@@ -95,24 +95,30 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
 
         const options = { year: "numeric", month: "short", day: "2-digit" };
         const dates = document.getElementById("dates");
+        const today = new Date();
         gigs.forEach(g => {
-            const loc = document.createTextNode(g[0]);
-            const d = document.createTextNode(new Date(g[1]).toLocaleDateString("en-GB", options));
+            const gigDate = new Date(g[1] + "T20:00Z")
+            console.log(gigDate);
+            console.log(today);
+            if (gigDate > today) {
+                const loc = document.createTextNode(g[0]);
+                const d = document.createTextNode(gigDate.toLocaleDateString("en-GB", options));
 
-            gig = document.createElement("div");
-            gig.className = "date-row";
+                gig = document.createElement("div");
+                gig.className = "date-row";
 
-            const left = document.createElement("div");
-            const right = document.createElement("div");
-            left.className = "gig-date";
-            right.className = "gig-location";
-            left.appendChild(d);
-            right.appendChild(loc);
-            gig.setAttribute("style", "font-size: " + f + "%");
+                const left = document.createElement("div");
+                const right = document.createElement("div");
+                left.className = "gig-date";
+                right.className = "gig-location";
+                left.appendChild(d);
+                right.appendChild(loc);
+                gig.setAttribute("style", "font-size: " + f + "%");
 
-            gig.appendChild(left);
-            gig.appendChild(right);
-            dates.appendChild(gig);
+                gig.appendChild(left);
+                gig.appendChild(right);
+                dates.appendChild(gig);
+            }
         });
     </script>
 </http>
