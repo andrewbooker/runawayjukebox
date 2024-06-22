@@ -31,9 +31,11 @@
             .sm-link {
                 margin: 10px;
             }
-            .about {
+            #about, .about {
                 text-align: center;
-                margin: 30px 16% 30px 16%;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                font-size: 90%;
             }
             #dates {
                 display: flex;
@@ -61,16 +63,55 @@
             <img id="main-image" src="rj_landscape.png" />
         </div>
         <div>
-            <div class="about">
+            <div id="about">
 Runaway Jukebox are an acoustic trio that came together in 2023 to play an extensive range of well-loved covers by the Beatles, Blur and Bowie to Weller, Wham and Stevie Wonder. Recently the band have recorded some originals, and perform these from time to time as their audience allows. Stubbsy's driving guitar and James's jangling electro-acoustic sit either side of Andrew's pulsing percussion, often with full-on three-part vocal harmonies, make up the unique Runaway Jukebox sound, good for functions and parties, or a banging evening out in the local watering hole.
             </div>
             <h2 id="dates-heading">Live dates</h2>
             <div class="dates" id="dates"></div>
+            <div class="about">
+                Contact us via <a href="https://www.facebook.com/profile.php?id=61550095325564">Facebook</a> or <span id="contact-link"></span> for bookings.
+            </div>
         </div>
     </body>
     <script>
         const openMic = 1;
         const privateParty = 2;
+
+        (function obfuscateEmail() {
+            const link = document.getElementById("contact-link");
+            const e = [
+                114,
+                117,
+                110,
+                97,
+                119,
+                97,
+                121,
+                106,
+                117,
+                107,
+                101,
+                98,
+                111,
+                120,
+                98,
+                97,
+                110,
+                100,
+                64,
+                103,
+                109,
+                97,
+                105,
+                108,
+                46,
+                99,
+                111,
+                109
+            ];
+            link.innerHTML = e.map(c => "&#" + c + ";").join("");
+        })();
+
         const gigs = [
             ["Half Moon, Bishops Stortford", "2024-06-21"],
             ["Duke Of Wellington, Epping", "2024-06-22"],
@@ -147,5 +188,10 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
                 dates.appendChild(gig);
             }
         });
+
+        const about = document.getElementById("about");
+        if (ratio === 1.0) {
+            about.setAttribute("style", "margin: 30px 16% 30px 16%; font-size: 100%;");
+        }
     </script>
 </http>
