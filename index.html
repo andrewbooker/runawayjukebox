@@ -125,9 +125,8 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
         const today = new Date();
         gigs.sort((a, b) => a[1] > b[1]);
         gigs.forEach(g => {
-            const gigDate = new Date(g[1] + "T20:00Z")
-            console.log(gigDate);
-            console.log(today);
+            const gigDateStr = g[1].includes("T") ? g[1] : g[1] + "T20:00Z";
+            const gigDate = new Date(gigDateStr);
             if (gigDate > today) {
                 const loc = document.createTextNode(g[0]);
                 const d = document.createTextNode(gigDate.toLocaleDateString("en-GB", options));
