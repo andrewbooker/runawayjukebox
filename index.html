@@ -41,6 +41,10 @@
                 display: flex;
                 flex-direction: column;
             }
+            #previous-dates {
+                font-size: 90%;
+                color: rgba(255,255,255,0.6);
+            }
             .date-row {
                 display: flex;
                 justify-content: center;
@@ -71,11 +75,14 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             <div class="about">
                 Contact us via <a href="https://www.facebook.com/profile.php?id=61550095325564">Facebook</a> or <span id="contact-link"></span> for bookings.
             </div>
+            <h3 id="previous-dates-heading">Previous appearances</h3>
+            <div class="dates" id="previous-dates"></div>
         </div>
     </body>
     <script>
         const openMic = 1;
         const privateParty = 2;
+        const stubbsySolo = 3;
 
         (function obfuscateEmail() {
             const link = document.getElementById("contact-link");
@@ -152,8 +159,8 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             ["Coach & Horses, Leyton", "2024-05-31"],
             ["Luna, Leytonstone", "2024-06-07"],
             ["Duke Of Wellington, Epping", "2024-11-16"],
-            ["Theydon Oak, Epping (Stubbsy solo)", "2024-07-04"],
-            ["Belgian Brewer, Bishops Stortford (Stubbsy solo)", "2024-09-19"]
+            ["Theydon Oak, Epping (Stubbsy solo)", "2024-07-04", stubbsySolo],
+            ["Belgian Brewer, Bishops Stortford (Stubbsy solo)", "2024-09-19", stubbsySolo]
         ];
 
         const img_size = { width: "400", height: "260" };
@@ -176,6 +183,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             }
             return d1 < d2 ? -1 : 1;
         });
+
         sortedGigs.forEach(g => {
             const gigDate = toGigDateTime(g[1]);
             if (gigDate > today) {
@@ -203,5 +211,38 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
         if (ratio === 1.0) {
             about.setAttribute("style", "margin: 30px 16% 30px 16%; font-size: 100%;");
         }
+
+        const olderGigs = gigs.sort((a, b) => {
+            const d1 = toGigDateTime(a[1]).getTime();
+            const d2 = toGigDateTime(b[1]).getTime();
+            if (d1 === d2) {
+                return 0;
+            }
+            return d1 > d2 ? -1 : 1;
+        });
+        const olderDates = document.getElementById("previous-dates");
+        sortedGigs.forEach(g => {
+            const gigDate = toGigDateTime(g[1]);
+            if (gigDate < today) {
+                const loc = document.createTextNode(g[0]);
+                const d = document.createTextNode(gigDate.toLocaleDateString("en-GB", options));
+
+                gig = document.createElement("div");
+                gig.className = "date-row";
+
+                const left = document.createElement("div");
+                const right = document.createElement("div");
+                left.className = "gig-date";
+                right.className = "gig-location";
+                left.appendChild(d);
+                right.appendChild(loc);
+                gig.setAttribute("style", "font-size: " + f + "%");
+
+                gig.appendChild(left);
+                gig.appendChild(right);
+                olderDates.appendChild(gig);
+            }
+        });
+
     </script>
 </http>
