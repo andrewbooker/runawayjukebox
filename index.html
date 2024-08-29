@@ -57,6 +57,17 @@
                font-weight: bold;
                color: rgba(255,255,255,0.6);
             }
+            .happening-soon {
+                padding-right: 0.4em;
+                font-weight: bold;
+                font-size: 110%;
+            }
+            .tomorrow {
+                color: orange;
+            }
+            .today {
+                color: yellow;
+            }
             a:link {
                 color: dodgerblue;
             }
@@ -196,7 +207,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
 
         const options = { year: "numeric", month: "short", day: "2-digit" };
         const dates = document.getElementById("dates");
-        const today = new Date();
+        const currentInstant = new Date();
         const toGigDateTime = (d) => new Date(d.includes("T") ? d : d + "T20:00Z");
         const sortedGigs = gigs.sort((a, b) => {
             const d1 = toGigDateTime(a[1]).getTime();
@@ -207,9 +218,31 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             return d1 < d2 ? -1 : 1;
         });
 
+        const today = currentInstant.toLocaleDateString(options);
+        const tm = new Date();
+        tm.setDate(currentInstant.getDate() + 1);
+        const tomorrow = tm.toLocaleDateString(options);
+
+        const addSoonTextTo = (addTo, t) => {
+            const tn = document.createElement("span");
+            tn.className = "happening-soon " + t.toLowerCase();
+            tn.appendChild(document.createTextNode(t));
+            addTo.appendChild(tn);
+        };
+
         sortedGigs.forEach(g => {
             const gigDate = toGigDateTime(g[1]);
-            if (gigDate > today) {
+            const gigDay = gigDate.toLocaleDateString(options);
+            const txts = [];
+            if (gigDate > currentInstant) {
+                let dayPs = null;
+                if (gigDay === today) {
+                    dayPs = "TODAY";
+                }
+                if (gigDay === tomorrow) {
+                    dayPs = "TOMORROW";
+                }
+
                 const loc = document.createTextNode(g[0]);
                 const d = document.createTextNode(gigDate.toLocaleDateString("en-GB", { ...options, weekday: "short" }).replace(",", ""));
 
@@ -220,10 +253,14 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
                 const right = document.createElement("div");
                 left.className = "gig-date";
                 right.className = "gig-location";
+
                 left.appendChild(d);
                 right.appendChild(loc);
-                gig.setAttribute("style", "font-size: " + f + "%");
 
+                gig.setAttribute("style", "font-size: " + f + "%");
+                if (dayPs) {
+                    addSoonTextTo(gig, dayPs)
+                }
                 gig.appendChild(left);
                 gig.appendChild(right);
                 dates.appendChild(gig);
@@ -247,7 +284,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
         const olderDates = document.getElementById("previous-dates");
         sortedGigs.forEach(g => {
             const gigDate = toGigDateTime(g[1]);
-            if (gigDate < today) {
+            if (gigDate < currentInstant) {
                 const loc = document.createTextNode(g[0]);
                 const d = document.createTextNode(gigDate.toLocaleDateString("en-GB", options));
 
