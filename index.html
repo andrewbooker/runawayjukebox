@@ -68,6 +68,9 @@
             .today {
                 color: yellow;
             }
+            .cancelled {
+                color: red;
+            }
             a:link {
                 color: dodgerblue;
             }
@@ -110,6 +113,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
         const privateParty = 2;
         const stubbsySolo = 3;
         const stubbsyAndrew = 4;
+        const cancelled = 5;
 
         (function obfuscateEmail() {
             const link = document.getElementById("contact-link");
@@ -150,7 +154,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             ["Half Moon, Bishops Stortford", "2024-06-21"],
             ["Duke Of Wellington, Epping", "2024-06-22"],
             ["Coach & Horses, Leyton", "2024-08-30"],
-            ["Picnic In The Park, Highams Park", "2024-09-08T14:00Z"],
+            ["Picnic In The Park, Highams Park", "2024-09-08T14:00Z", cancelled],
             ["Bar Love, Portobello Road, London", "2024-09-12"],
             ["Berkhamsted Beer Festival", "2024-09-14"],
             ["Luna, Leytonstone", "2024-09-28"],
@@ -194,7 +198,8 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             ["Theydon Oak, Epping (Stubbsy and Andrew)", "2024-08-25", stubbsyAndrew],
             ["Thrive, Cambridge (completely acoustic)", "2024-11-17"],
             ["The Cart Shed, Thornwood (Stubbsy and Andrew)", "2024-08-24", stubbsyAndrew],
-            ["Fairycroft House, Saffron Walden", "2024-10-06"]
+            ["Fairycroft House, Saffron Walden", "2024-10-06"],
+            ["Heron Close Fields, Sawbridgeworth (private party)", "2024-09-07", privateParty]
         ];
 
         const img_size = { width: "400", height: "260" };
@@ -234,6 +239,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             const gigDate = toGigDateTime(g[1]);
             const gigDay = gigDate.toLocaleDateString(options);
             const txts = [];
+            const isCancelled = g.length > 2 && g[2] === cancelled;
             if (gigDate > currentInstant) {
                 let dayPs = null;
                 if (gigDay === today) {
@@ -258,8 +264,10 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
                 right.appendChild(loc);
 
                 gig.setAttribute("style", "font-size: " + f + "%");
-                if (dayPs) {
-                    addSoonTextTo(gig, dayPs)
+                if (isCancelled) {
+                    addSoonTextTo(gig, "CANCELLED");
+                } else if (dayPs) {
+                    addSoonTextTo(gig, dayPs);
                 }
                 gig.appendChild(left);
                 gig.appendChild(right);
@@ -284,7 +292,8 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
         const olderDates = document.getElementById("previous-dates");
         sortedGigs.forEach(g => {
             const gigDate = toGigDateTime(g[1]);
-            if (gigDate < currentInstant) {
+            const wasCancelled = g.length > 2 && g[2] === cancelled;
+            if (gigDate < currentInstant && !wasCancelled) {
                 const loc = document.createTextNode(g[0]);
                 const d = document.createTextNode(gigDate.toLocaleDateString("en-GB", options));
 
