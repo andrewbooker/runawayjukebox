@@ -160,7 +160,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             ["Picnic In The Park, Highams Park", "2024-09-08T14:00Z", cancelled],
             ["Bar Love, Portobello Road, London", "2024-09-12"],
             ["Berkhamsted Beer Festival", "2024-09-14"],
-            ["Luna, Leytonstone", "2024-09-28"],
+            ["Luna, Leytonstone", "2024-09-28", cancelled],
             ["Bar Love, Portobello Road, London", "2024-10-10"],
             ["Bar Love, Portobello Road, London", "2024-11-14"],
             ["Theydon Bois (private party)", "2024-11-30", privateParty],
@@ -269,7 +269,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
 
                 gig.setAttribute("style", "font-size: " + f + "%");
                 if (isCancelled) {
-                    addSoonTextTo(gig, "CANCELLED");
+                    addSoonTextTo(gig, "CANCELLED (venue closed down)");
                 } else if (dayPs) {
                     addSoonTextTo(gig, dayPs);
                 }
