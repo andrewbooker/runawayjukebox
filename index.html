@@ -93,13 +93,16 @@
             <img id="main-image" src="rj_landscape.png" />
         </div>
         <div>
-            <div id="testimonial">
-<i>"Runaway Jukebox created the perfect vibe for my son's 21st. Music for all ages. Sunshine On Leith was superb and the Dua Lipa numbers went down a storm. They even let James get up and sing &#128512; A great sound for any occasion."</i><br/>(Faye, Sawbridgeworth)
+            <div class="autosize">
+<i>"Runaway Jukebox created the perfect vibe for my son's 21st. Music for all ages. Sunshine On Leith was superb and the Dua Lipa numbers went down a storm. They even let James get up and sing &#128512; A great sound for any occasion."</i><br/>(Faye, Sawbridgeworth, Aug 2024)
             </div>
-            <div id="about">
+            <div class="autosize">
+<i>"We booked Runaway Jukebox for our wedding party. An absolute professional outfit from booking, sorting out a setlist unique to us and then the amazing performance to start married life in style!"</i><br/>(Sammy Watts, Sep 2024)
+            </div>
+            <div id="about" class="autosize">
 Runaway Jukebox are an acoustic trio that came together in 2023 to play an extensive range of well-loved covers by the Beatles, Blur and Bowie to Weller, Wham and Stevie Wonder. Recently the band have recorded some originals, and perform these from time to time as their audience allows. Stubbsy's driving guitar and James's jangling electro-acoustic sit either side of Andrew's pulsing percussion, often with full-on three-part vocal harmonies, make up the unique Runaway Jukebox sound, good for functions and parties, or a banging evening out in the local watering hole.
             </div>
-            <div id="latest-news">
+            <div id="latest-news" class="autosize">
 <span class="attention">BEHOLD!! Our first EP <i>Pullpusher</i> is now available digitally from <a href="https://runawayjukebox.bandcamp.com/album/pullpusher">Bandcamp</a>.</span> It features three originals we regularly play live, and was recorded at Eastcote Studios and the Pierce Rooms, in West London, Feb/March 2024, engineered and produced by <a href="https://en.wikipedia.org/wiki/Dave_McCracken">Dave McCracken</a>. Yours for a mere five English pounds. That's the record, not Dave.
             </div>
             <h2 id="dates-heading">Live dates</h2>
@@ -281,8 +284,7 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
             }
         });
 
-        ["about", "latest-news", "testimonial"].forEach(id => {
-            const e = document.getElementById(id);
+        Array.from(document.getElementsByClassName("autosize")).forEach(e => {
             if (ratio === 1.0) {
                 e.setAttribute("style", "margin: 30px 16% 30px 16%; font-size: 100%;");
             }
