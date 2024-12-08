@@ -322,9 +322,10 @@ Runaway Jukebox are an acoustic trio that came together in 2023 to play an exten
         });
         Object.keys(olderGigsByYear).toSorted((a, b) => b - a).forEach(y => {
             const yearHeading = document.createElement("h4");
-            yearHeading.appendChild(document.createTextNode(y));
+            const gigs = olderGigsByYear[y];
+            yearHeading.appendChild(document.createTextNode(y + " (" + gigs.length + ")"));
             olderDates.appendChild(yearHeading);
-            olderGigsByYear[y].forEach(og => {
+            gigs.forEach(og => {
                 const d = document.createTextNode(og[0]);
                 const loc = document.createTextNode(og[1]);
                 const gig = document.createElement("div");
