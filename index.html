@@ -57,6 +57,9 @@
                font-weight: bold;
                color: rgba(255,255,255,0.6);
             }
+            .tickets {
+                margin-left: 6px;
+            }
             .happening-soon {
                 padding-right: 0.4em;
                 font-weight: bold;
@@ -102,7 +105,7 @@
 Runaway Jukebox are an acoustic trio that came together in 2023 to play an extensive range of well-loved covers by the Beatles, Blur and Bowie to Weller, Wham and Stevie Wonder. Recently the band have recorded some originals, and perform these from time to time as their audience allows. Stubbsy's driving guitar and James's jangling electro-acoustic sit either side of Andrew's pulsing percussion, often with full-on three-part vocal harmonies, make up the unique Runaway Jukebox sound, good for functions and parties, or a banging evening out in the local watering hole.
             </div>
             <div id="about" class="autosize">
-Finding ourselves playing in a couple of loud pubs in recent times, we've been trying out playing as a guitar/bass/drums power trio, with the same level of attention to the vocals and harmonies. For our next couple of gigs we'll be opening with the normal acoustic and electric guitars and pandeiro format, then for the second set we'll be <i>Judas Jukebox</i>, as we call it. We're looking forward to it, it's going to be immense!! For the quieter gigs, where people are paying attention to us, we'll be our normal more unplugged selves. 
+Our next performance is a very special 2-hour semi-acoustic show at the South Mill Arts Centre in Bishops Stortford on Thurs 28 Aug 2025. We'll be playing two sets. The first will be all original material, the second will be our favourite covers. Unlike most of our gigs, this is a ticketed show. Tickets are available now for £8 from the South Mill Arts <a href="https://southmillarts.ticketsolve.com/ticketbooth/shows/873671352">box office</a>.
             </div>
             <div id="latest-news" class="autosize">
 <span class="attention">BEHOLD!! Our first EP <i>Pullpusher</i> is available digitally from <a href="https://runawayjukebox.bandcamp.com/album/pullpusher">Bandcamp</a>.</span> It features three originals we regularly play live, and was recorded at Eastcote Studios and the Pierce Rooms, in West London, Feb/March 2024, engineered and produced by <a href="https://en.wikipedia.org/wiki/Dave_McCracken">Dave McCracken</a>. Yours for a mere five English pounds. That's the record, not Dave.
@@ -122,7 +125,8 @@ Finding ourselves playing in a couple of loud pubs in recent times, we've been t
         const stubbsySolo = 3;
         const stubbsyAndrew = 4;
         const cancelled = 5;
-	const stubbsyAndJames = 6;
+	    const stubbsyAndJames = 6;
+	    const tickets = 7;
 
         (function obfuscateEmail() {
             const link = document.getElementById("contact-link");
@@ -221,7 +225,7 @@ Finding ourselves playing in a couple of loud pubs in recent times, we've been t
             ["Mad Squirrel, St Albans Tap Room", "2025-03-01"],
             ["Courtyard, Chelmsford (Stubbsy and James)", "2025-02-08", stubbsyAndJames],
             ["Coach & Horses, Leyton", "2025-03-07"],
-            ["South Mill Arts Centre, Bishops Stortford", "2025-08-28"],
+            ["South Mill Arts Centre, Bishops Stortford", "2025-08-28", tickets, 8, "https://southmillarts.ticketsolve.com/ticketbooth/shows/873671352"],
             ["Crown, Waltham Abbey", "2025-02-15"],
             ["Crown, Waltham Abbey", "2025-04-05"],
             ["Theydon Oak, Epping", "2025-06-05"],
@@ -301,6 +305,17 @@ Finding ourselves playing in a couple of loud pubs in recent times, we've been t
                 }
                 gig.appendChild(left);
                 gig.appendChild(right);
+                
+                if (g[2] === tickets) {
+                    const boxOffice = document.createElement("div");
+                    boxOffice.className = "tickets";
+                    const link = document.createElement("a");
+                    link.setAttribute("href", g[4]);
+                    const b = document.createTextNode("tickets £" + g[3]);
+                    link.appendChild(b);
+                    boxOffice.appendChild(link);
+                    gig.appendChild(boxOffice);
+                }
                 dates.appendChild(gig);
             }
         });
